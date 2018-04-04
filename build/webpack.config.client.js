@@ -1,32 +1,48 @@
 const path = require('path');
-const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
-module.exports = {
-    entry :{
-        app : path.join(__dirname,"../client/app.js")
+const HTMLPlugin = require('html-webpack-plugin');
+const isDev = process.env.NODE_DEV === "development";
+
+const config = {
+    entry:{
+        app:path.join(__dirname,"../client/index.js")
     },
-    output : {
-        filename: '[name].[hash].js',
+    output:{
+        filename:"[name].[hash].js",
         path:path.join(__dirname,"../dist"),
-        publicPath: "/public"
+        publicPath:"/public"
     },
-    module : {
-        rules: [
+    module:{
+        rules:[
             {
-                test:/.jsx$/,
-                loader: "babel-loader"
-            },
-            {
-                test:/.js$/,
-                loader: "babel-loader",
+                test:/\.js$/,
+                loader:"babel-loader",
                 exclude:[
-                    path.join(__dirname,'../node_modules')
+                    path.join(__dirname,"../node_modules")
                 ]
             }
         ]
     },
-    plugins: [
-        new HTML_WEBPACK_PLUGIN({
+    plugins:[
+        new HTMLPlugin({
             template:path.join(__dirname,"../client/template.html")
         })
     ]
-}
+};
+
+if(isDev){
+    config.devServer = {
+        host:"0.0.0.0",
+        port :"8888",
+        contentBase:path.join(__dirname,"../dist"),
+        //hot:true,
+        overlay:{
+            errors:true
+        },
+        publicPath:"/public",
+        historyApiFallback:{
+            //所有404的请求都返回index.html
+            index:"/public/index.html"
+        }
+    }
+};
+module.exports = config
