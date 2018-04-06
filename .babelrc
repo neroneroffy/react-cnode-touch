@@ -2,5 +2,6 @@
   "presets":[
     ["es2015",{"loose":true}],
     "react"
-  ]
+  ],
+  "plugins":["react-hot-loader/babel"]
 }

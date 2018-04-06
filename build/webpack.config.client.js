@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
 const isDev = process.env.NODE_DEV === "development";
 
 const config = {
@@ -9,7 +10,7 @@ const config = {
     output:{
         filename:"[name].[hash].js",
         path:path.join(__dirname,"../dist"),
-        publicPath:"/public"
+        publicPath:"/public/"
     },
     module:{
         rules:[
@@ -30,19 +31,26 @@ const config = {
 };
 
 if(isDev){
+    config.entry = {
+        app:[
+            "react-hot-loader/patch",
+            path.join(__dirname,"../client/index.js")
+        ]
+    }
     config.devServer = {
         host:"0.0.0.0",
         port :"8888",
         contentBase:path.join(__dirname,"../dist"),
-        //hot:true,
+        hot:true,
         overlay:{
             errors:true
         },
-        publicPath:"/public",
+        publicPath:"http://localhost:8888/public",
         historyApiFallback:{
             //所有404的请求都返回index.html
             index:"/public/index.html"
         }
-    }
+    };
+    config.plugins.push(new webpack.HotModuleReplacementPlugin())
 };
 module.exports = config
