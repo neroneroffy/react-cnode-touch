@@ -33,6 +33,7 @@ serverCompiler.watch({},(err,status)=>{
     m._compile(bundle,"server-entry.js");
     serverBundle = m.exports.default
 })
+
 module.exports=function devStatic(app) {
     app.use("/public",proxy({
         target:"http://localhost:8888"

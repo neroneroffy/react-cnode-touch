@@ -1,0 +1,6 @@
+{
+  "extends":"standard",
+  "rules": {
+    "linebreak-style": "off"
+  }
+}
