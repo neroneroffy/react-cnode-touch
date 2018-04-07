@@ -1,42 +1,24 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
-const isDev = process.env.NODE_DEV === "development";
+const webpackMerge = require("webpack-merge");
+const webpackBase = require("./webpack.base");
+const isDev = process.env.NODE_ENV === "development";
 
-const config = {
+const config = webpackMerge(webpackBase,{
     entry:{
         app:path.join(__dirname,"../client/index.js")
     },
     output:{
         filename:"[name].[hash].js",
-        path:path.join(__dirname,"../dist"),
-        publicPath:"/public/"
     },
-    module:{
-        rules:[
-            {
-                enforce: "pre",
-                test:/.(js|jsx)$/,
-                loader:"eslint-loader",
-                exclude:[
-                    path.resolve(__dirname,'../node_modules')
-                ]
-            },
-            {
-                test:/\.js$/,
-                loader:"babel-loader",
-                exclude:[
-                    path.join(__dirname,"../node_modules")
-                ]
-            }
-        ]
-    },
+
     plugins:[
         new HTMLPlugin({
             template:path.join(__dirname,"../client/template.html")
         })
     ]
-};
+});
 
 if(isDev){
     config.entry = {

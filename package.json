@@ -7,8 +7,8 @@
     "build:client": "webpack --config build/webpack.config.client.js --mode production",
     "build:server": "webpack --config build/webpack.config.server.js --mode production",
     "clear": "rimraf dist",
-    "dev:client": "cross-env NODE_DEV=development webpack-dev-server --config build/webpack.config.client.js  --mode development",
-    "dev:server": "cross-env NODE_DEV=development node server/server.js --mode development",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js  --mode development",
+    "dev:server": "nodemon server/server.js --mode development",
     "build": "npm run clear && npm run build:client && npm run build:server",
     "lint": "eslint --ext .js --ext .jsx client/",
     "precommit": "npm run lint"
@@ -20,6 +20,7 @@
     "express": "^4.16.3",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
+    "serve-favicon": "^2.5.0",
     "webpack": "^4.4.1"
   },
   "devDependencies": {
@@ -44,9 +45,11 @@
     "http-proxy-middleware": "^0.18.0",
     "husky": "^0.14.3",
     "memory-fs": "^0.4.1",
+    "nodemon": "^1.17.3",
     "react-hot-loader": "^4.0.0",
     "rimraf": "^2.6.2",
     "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.1.2"
   }
 }

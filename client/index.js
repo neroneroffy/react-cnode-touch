@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './App';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader';// eslint-disable-line
 // react热更新
 const root = document.getElementById('root');
 // const render = Component => {
