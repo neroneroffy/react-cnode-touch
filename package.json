@@ -17,10 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mobx": "^4.1.1",
     "mobx-react": "^5.0.0",
     "prop-types": "^15.6.1",
+    "query-string": "^6.0.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
